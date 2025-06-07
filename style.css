@@ -218,19 +218,20 @@ header {
     /* grid-template-columns: 1fr 1fr; */
     /* gap: 7rem; */
     /* justify-content: center; */
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 200px;
 }
 
 @media screen and (max-width: 768px) {
-    .about-grid{
+    .about-grid {
         flex-wrap: wrap;
     }
 
-    .about-grid img`{
+    .about-grid img {
         margin-top: 20px;
     }
 
-    body{
+    body {
         text-align: center;
         align-items: center;
     }
