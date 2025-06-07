@@ -6,13 +6,12 @@
     <title>My Projects | Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        /* Base Styles */
         :root {
-            --primary-color: #d4b800;
-            --secondary-color: #3d3300;
+            --primary-color: #ffcf31;
+            --secondary-color: #f8cf00;
             --dark-color: #0e0e0e;
-            --light-color: #4e4e4e;
-            --accent-color: #e74c3c;
+            --light-color: #b9b9b9;
+            --accent-color: #393939;
         }
         
         * {
@@ -24,15 +23,15 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--dark-color);
-            color: #ffae00;
+            color: #ffffff;
             line-height: 1.6;
             overflow-x: hidden;
         }
         
         /* Header Styles */
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
+            background: linear-gradient(135deg, #0e0e0e, #ffd500);
+            color: #ffffff;
             padding: 2rem 0;
             text-align: center;
             position: relative;
@@ -98,7 +97,7 @@
         }
         
         .project-card {
-            background: white;
+            background: #1c1c1c;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -121,6 +120,7 @@
             height: 200px;
             overflow: hidden;
             position: relative;
+            cursor: pointer;
         }
         
         .project-image img {
@@ -141,7 +141,7 @@
         .project-info h3 {
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
-            color: var(--dark-color);
+            color: #ffffff;
         }
         
         .project-info p {
@@ -158,17 +158,17 @@
         
         .tag {
             background: var(--light-color);
-            color: var(--dark-color);
+            color: #ffffff;
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
         }
         
-        .tag.html { background: #f16529; color: white; }
-        .tag.css { background: #2965f1; color: white; }
-        .tag.js { background: #f0db4f; color: black; }
-        .tag.react { background: #61dbfb; color: black; }
+        .tag.html { background: #d7b300; color: #000000; }
+        .tag.css { background: #d7b300; color: #000000; }
+        .tag.js { background: #d7b300; color: #000000; }
+        .tag.react { background: #d7b300; color: #000000; }
         
         .project-links {
             display: flex;
@@ -188,7 +188,7 @@
         
         .btn-primary {
             background: var(--primary-color);
-            color: white;
+            color: #ffffff;
         }
         
         .btn-primary:hover {
@@ -218,7 +218,7 @@
         
         .featured-title h2 {
             font-size: 2.5rem;
-            color: var(--dark-color);
+            color: #ffffff;
             display: inline-block;
             position: relative;
         }
@@ -362,6 +362,62 @@
             transform: translateY(-5px);
         }
         
+        /* Lightbox Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+            animation: fadeIn 0.3s;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .modal-content, #caption {
+            animation: zoomIn 0.3s;
+        }
+        
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: var(--primary-color);
+            transform: rotate(90deg);
+        }
+        
         /* Animations */
         @keyframes slideDown {
             from {
@@ -403,6 +459,16 @@
             }
         }
         
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        
+        @keyframes zoomIn {
+            from {transform: translate(-50%, -50%) scale(0.9);}
+            to {transform: translate(-50%, -50%) scale(1);}
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             h1 {
@@ -419,6 +485,11 @@
             
             .slide-content h3 {
                 font-size: 1.5rem;
+            }
+            
+            .modal-content {
+                max-width: 95%;
+                max-height: 80%;
             }
         }
     </style>
@@ -437,7 +508,7 @@
         <div class="projects-grid">
 
                 <div class="project-card">
-                <div class="project-image">
+                <div class="project-image" onclick="openModal('images - Copy/works.jpg', 'Work1')">
                     <img src="images - Copy/works.jpg" alt="Fitness Tracker">
                 </div>
                 <div class="project-info">
@@ -448,16 +519,16 @@
                         <span class="tag css">SolidWorks</span>
                         <span class="tag js">Fusion 360</span>
                     </div>
-                    <div class="project-links">
+                    <!-- <div class="project-links">
                         <a href="#" class="btn btn-primary">Live Demo</a>
                         <a href="#" class="btn btn-secondary">View Code</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
             <!-- Project 5 -->
             <div class="project-card">
-                <div class="project-image">
+                <div class="project-image" onclick="openModal('images - Copy/done.jpg', 'Work2')">
                     <img src="images - Copy/done.jpg" alt="Recipe Finder">
                 </div>
                 <div class="project-info">
@@ -468,16 +539,16 @@
                         <span class="tag css">SolidWorks</span>
                         <span class="tag js">Fusion 360</span>
                     </div>
-                    <div class="project-links">
+                    <!-- <div class="project-links">
                         <a href="#" class="btn btn-primary">Live Demo</a>
                         <a href="#" class="btn btn-secondary">View Code</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
             <!-- Project 1 -->
             <div class="project-card">
-                <div class="project-image">
+                <div class="project-image" onclick="openModal('images - Copy/exca.png', 'Work3')">
                     <img src="images - Copy/exca.png" alt="">
                 </div>
                 <div class="project-info">
@@ -488,16 +559,16 @@
                         <span class="tag css">SolidWorks</span>
                         <span class="tag js">Fusion 360</span>
                     </div>
-                    <div class="project-links">
+                    <!-- <div class="project-links">
                         <a href="#" class="btn btn-primary">Live Demo</a>
                         <a href="#" class="btn btn-secondary">View Code</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             
             <!-- Project 2 -->
             <div class="project-card">
-                <div class="project-image">
+                <div class="project-image" onclick="openModal('images - Copy/home.png', 'Work4')">
                     <img src="images - Copy/home.png" alt="">
                 </div>
                 <div class="project-info">
@@ -508,16 +579,16 @@
                         <span class="tag css">SolidWorks</span>
                         <span class="tag js">Fusion 360</span>
                     </div>
-                    <div class="project-links">
+                    <!-- <div class="project-links">
                         <a href="#" class="btn btn-primary">Live Demo</a>
                         <a href="#" class="btn btn-secondary">View Code</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             
             <!-- Project 3 -->
             <div class="project-card">
-                <div class="project-image">
+                <div class="project-image" onclick="openModal('images - Copy/aaa.png', 'Work5')">
                     <img src="images - Copy/aaa.png" alt="Task Manager">
                 </div>
                 <div class="project-info">
@@ -528,16 +599,16 @@
                         <span class="tag css">SolidWorks</span>
                         <span class="tag js">Fusion 360</span>
                     </div>
-                    <div class="project-links">
+                    <!-- <div class="project-links">
                         <a href="#" class="btn btn-primary">Live Demo</a>
                         <a href="#" class="btn btn-secondary">View Code</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             
             <!-- Project 4 -->
             <div class="project-card">
-                <div class="project-image">
+                <div class="project-image" onclick="openModal('images - Copy/plane.png', 'Work6')">
                     <img src="images - Copy/plane.png" alt="">
                 </div>
                 <div class="project-info">
@@ -548,15 +619,22 @@
                         <span class="tag css">SolidWorks</span>
                         <span class="tag js">Fusion 360</span>
                     </div>
-                    <div class="project-links">
+                    <!-- <div class="project-links">
                         <a href="#" class="btn btn-primary">Live Demo</a>
                         <a href="#" class="btn btn-secondary">View Code</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             
         </div>
     </section>
+    
+    <!-- The Modal/Lightbox -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
     
     <section class="featured-projects">
         <div class="featured-title">
@@ -708,6 +786,35 @@
                 });
             });
         });
+        
+        // Lightbox functionality
+        function openModal(imageSrc, title) {
+            const modal = document.getElementById('myModal');
+            const modalImg = document.getElementById('img01');
+            const captionText = document.getElementById('caption');
+            
+            modal.style.display = "block";
+            modalImg.src = imageSrc;
+            captionText.innerHTML = title;
+            
+            // Close modal when clicking outside the image
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Close modal with ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+        }
+        
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
     </script>
 </body>
 </html>
