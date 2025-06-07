@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-color: #d4b800;
+            --secondary-color: #3d3300;
+            --dark-color: #0e0e0e;
+            --light-color: #4e4e4e;
+            --accent-color: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-color);
+            color: #ffae00;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            transform: translateY(-20px);
+            opacity: 0;
+            animation: slideDown 1s forwards 0.5s;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 1s forwards 0.8s;
+        }
+        
+        /* Animated Background Elements */
+        .bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: -100px;
+            animation: float 8s infinite ease-in-out;
+        }
+        
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -50px;
+            right: -50px;
+            animation: float 10s infinite ease-in-out 2s;
+        }
+        
+        /* Projects Grid */
+        .projects-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+        
+        .project-info {
+            padding: 1.5rem;
+        }
+        
+        .project-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+        
+        .project-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tag {
+            background: var(--light-color);
+            color: var(--dark-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .tag.html { background: #f16529; color: white; }
+        .tag.css { background: #2965f1; color: white; }
+        .tag.js { background: #f0db4f; color: black; }
+        .tag.react { background: #61dbfb; color: black; }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        
+        .btn-secondary {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #27ae60;
+        }
+        
+        /* Featured Projects Section */
+        .featured-projects {
+            margin: 5rem 0;
+            position: relative;
+        }
+        
+        .featured-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .featured-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            display: inline-block;
+            position: relative;
+        }
+        
+        .featured-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        .featured-slider {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease, transform 1s ease;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+        }
+        
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 1;
+        }
+        
+        .slide.next {
+            transform: scale(0.9);
+            z-index: 0;
+        }
+        
+        .slide.prev {
+            transform: scale(0.9);
+            z-index: 0;
+        }
+        
+        .slide-content {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            padding: 2rem;
+            width: 100%;
+            transform: translateY(100px);
+            transition: transform 0.5s ease;
+        }
+        
+        .slide.active .slide-content {
+            transform: translateY(0);
+        }
+        
+        .slide-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .slide-content p {
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+        }
+        
+        /* Stats Section */
+        .stats {
+            background: var(--dark-color);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+        
+        .stat-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease;
+        }
+        
+        .stat-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--light-color);
+        }
+        
+        /* Footer */
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(20px, 20px);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-slider {
+                height: 400px;
+            }
+            
+            .slide-content h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="shape-1 bg-shape"></div>
+        <div class="shape-2 bg-shape"></div>
+        <div class="header-content">
+            <h1>My Projects</h1>
+            <p class="subtitle">A collection of my recent work in web development and design</p>
+        </div>
+    </header>
+    
+    <section class="projects-container">
+        <div class="projects-grid">
+
+                <div class="project-card">
+                <div class="project-image">
+                    <img src="images - Copy/works.jpg" alt="Fitness Tracker">
+                </div>
+                <div class="project-info">
+                    <h3>Work1</h3>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est dndn ddala wwii</p>
+                    <div class="project-tags">
+                        <span class="tag html">Arduino</span>
+                        <span class="tag css">SolidWorks</span>
+                        <span class="tag js">Fusion 360</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-primary">Live Demo</a>
+                        <a href="#" class="btn btn-secondary">View Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="images - Copy/done.jpg" alt="Recipe Finder">
+                </div>
+                <div class="project-info">
+                    <h3>Work2</h3>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est dndn ddala wwii</p>
+                    <div class="project-tags">
+                        <span class="tag html">Arduino</span>
+                        <span class="tag css">SolidWorks</span>
+                        <span class="tag js">Fusion 360</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-primary">Live Demo</a>
+                        <a href="#" class="btn btn-secondary">View Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 1 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="images - Copy/exca.png" alt="">
+                </div>
+                <div class="project-info">
+                    <h3>Work3</h3>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est dndn ddala wwii</p>
+                    <div class="project-tags">
+                        <span class="tag html">Arduino</span>
+                        <span class="tag css">SolidWorks</span>
+                        <span class="tag js">Fusion 360</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-primary">Live Demo</a>
+                        <a href="#" class="btn btn-secondary">View Code</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="images - Copy/home.png" alt="">
+                </div>
+                <div class="project-info">
+                    <h3>Work4</h3>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est dndn ddala wwii</p>
+                    <div class="project-tags">
+                        <span class="tag html">Arduino</span>
+                        <span class="tag css">SolidWorks</span>
+                        <span class="tag js">Fusion 360</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-primary">Live Demo</a>
+                        <a href="#" class="btn btn-secondary">View Code</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="images - Copy/aaa.png" alt="Task Manager">
+                </div>
+                <div class="project-info">
+                    <h3>Work5</h3>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est dndn ddala wwii</p></p>
+                    <div class="project-tags">
+                        <span class="tag html">Arduino</span>
+                        <span class="tag css">SolidWorks</span>
+                        <span class="tag js">Fusion 360</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-primary">Live Demo</a>
+                        <a href="#" class="btn btn-secondary">View Code</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 4 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="images - Copy/plane.png" alt="">
+                </div>
+                <div class="project-info">
+                    <h3>Work6</h3>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est dndn ddala wwii</p>
+                    <div class="project-tags">
+                        <span class="tag html">Arduino</span>
+                        <span class="tag css">SolidWorks</span>
+                        <span class="tag js">Fusion 360</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-primary">Live Demo</a>
+                        <a href="#" class="btn btn-secondary">View Code</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+    <section class="featured-projects">
+        <div class="featured-title">
+            <h2>Featured Projects</h2>
+        </div>
+        
+        <div class="featured-slider">
+            <!-- Slide 1 -->
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1559028012-481c04fa702d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1136&q=80')">
+                <div class="slide-content">
+                    <h3>Interactive Dashboard</h3>
+                    <p>A comprehensive analytics dashboard with real-time data visualization and customizable widgets.</p>
+                    <a href="#" class="btn btn-primary">View Project</a>
+                </div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="slide next" style="background-image: url('https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80')">
+                <div class="slide-content">
+                    <h3>Social Media Platform</h3>
+                    <p>A full-stack social networking application with user profiles, posts, and real-time messaging.</p>
+                    <a href="#" class="btn btn-primary">View Project</a>
+                </div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="slide prev" style="background-image: url('https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80')">
+                <div class="slide-content">
+                    <h3>E-learning Platform</h3>
+                    <p>An online learning management system with course creation, video lessons, and progress tracking.</p>
+                    <a href="#" class="btn btn-primary">View Project</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number" data-count="10">0</div>
+                <div class="stat-label">Completed Projects</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="9">0</div>
+                <div class="stat-label">Happy Clients</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="50">0</div>
+                <div class="stat-label">Networks</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="1">0</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy;2025 Jason Ablorde. All rights reserved.</p>
+        <div class="social-links">
+                <a href="mailto:jaysonablorde@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                <a href="tel:+233247775232" class="social-link"><i class="fas fa-phone"></i></a>
+                <a href="https://www.linkedin.com/in/jason-ablorde-54a27b349?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app " class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://x.com/JasonAblor28340?t=izZQoosk6k8IsNDSD1Bwgw&s=08 " class="social-link"><i class="fa-brands fa-square-x-twitter"></i></a>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Scroll animations for project cards
+            const projectCards = document.querySelectorAll('.project-card');
+            const statItems = document.querySelectorAll('.stat-item');
+            
+            // Intersection Observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Animate stats counting up
+                        if (entry.target.classList.contains('stat-item')) {
+                            const statNumber = entry.target.querySelector('.stat-number');
+                            const target = parseInt(statNumber.getAttribute('data-count'));
+                            const duration = 2000; // 2 seconds
+                            const step = target / (duration / 16); // 60fps
+                            let current = 0;
+                            
+                            const counter = setInterval(() => {
+                                current += step;
+                                if (current >= target) {
+                                    clearInterval(counter);
+                                    statNumber.textContent = target;
+                                } else {
+                                    statNumber.textContent = Math.floor(current);
+                                }
+                            }, 16);
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            projectCards.forEach(card => {
+                observer.observe(card);
+            });
+            
+            statItems.forEach(item => {
+                observer.observe(item);
+            });
+            
+            // Featured projects slider
+            const slides = document.querySelectorAll('.slide');
+            let currentSlide = 0;
+            
+            function nextSlide() {
+                slides[currentSlide].classList.remove('active');
+                slides[currentSlide].classList.add('prev');
+                
+                currentSlide = (currentSlide + 1) % slides.length;
+                
+                slides[currentSlide].classList.remove('next');
+                slides[currentSlide].classList.add('active');
+                
+                // Set the next slide
+                const nextSlideIndex = (currentSlide + 1) % slides.length;
+                slides.forEach(slide => slide.classList.remove('next'));
+                slides[nextSlideIndex].classList.add('next');
+            }
+            
+            // Auto-rotate slides every 5 seconds
+            setInterval(nextSlide, 5000);
+            
+            // Header animation on load
+            setTimeout(() => {
+                document.querySelector('header').style.animation = 'pulse 2s infinite alternate';
+            }, 1500);
+            
+            // Add hover effect to project cards
+            projectCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-10px)';
+                    card.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.2)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                    card.style.boxShadow = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
