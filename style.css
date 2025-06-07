@@ -29,6 +29,117 @@
     box-sizing: border-box;
 }
 
+/* Fixed Header */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    left: 0;
+    right: 0;
+    background-color: var(--bg);
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Add padding to body to account for fixed header */
+body {
+    padding-top: 80px;
+}
+
+/* Hamburger Menu */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.hamburger-line {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: var(--text);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.menu-toggle.active .hamburger-line:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.menu-toggle.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .hamburger-line:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 80px; /* Adjusted to account for fixed header */
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: calc(100vh - 80px);
+        background: var(--card-bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 2rem;
+        padding-top: 2rem;
+        transition: right 0.3s ease;
+        z-index: 999; /* Below the toggle but above content */
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .nav-links.active {
+        right: 0;
+    }
+    
+    .nav-links a {
+        font-size: 1.2rem;
+        padding: 0.5rem 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .theme-toggle {
+        margin-top: 1rem;
+        font-size: 1.5rem;
+    }
+    
+    body {
+        padding-top: 80px;
+    }
+    
+    /* Prevent scrolling when menu is open */
+    body.menu-open {
+        overflow: hidden;
+    }
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     color: var(--text);
@@ -115,6 +226,12 @@ header {
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .hero{
+        margin-top: 50px;
+    }
 }
 
 .hero-content h1 {
@@ -434,76 +551,6 @@ header {
     border-radius: 50px;
     font-size: 0.75rem;
     font-weight: 500;
-}/* Projects Section */
-.all-projects{
-    color: #e2c000;
-    margin-right: 0;
-    font-size: 20px;
-}
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.project-card {
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-.project-img {
-    height: 200px;
-    overflow: hidden;
-}
-
-.project-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.project-card:hover .project-img img {
-    transform: scale(1.1);
-}
-
-.project-content {
-    padding: 1.5rem;
-}
-
-.project-content h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-}
-
-.project-content p {
-    color: var(--text-light);
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-}
-
-.project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.project-tag {
-    background: var(--bg-secondary);
-    padding: 0.25rem 0.75rem;
-    border-radius: 50px;
-    font-size: 0.75rem;
-    font-weight: 500;
 }
 
 /* Contact Section */
@@ -623,9 +670,6 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .nav-links {
-        display: none;
-    }
 
     .hero-content h1 {
         font-size: 2.5rem;
