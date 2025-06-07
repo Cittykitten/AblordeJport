@@ -24,10 +24,10 @@
             </button>
         </header>
 
-        <section class="hero" id="home">
+      <section class="hero" id="home">
             <div class="hero-content">
                 <h1>Jason <span>Ablorde</span></h1>
-                <p>Enthusiastic roboticist skilled in Arduino, CAD, and React Native. Passionate about automating tasks to improve productivity.</p>
+                <p>Enthusiastic roboticist skilled in Arduino, CAD, C++ and React Native. Passionate about automating tasks to improve productivity.</p>
                 <div class="hero-btns">
                     <a href="#projects" class="btn">View My Projects</a>
                     <a href="#contact" class="btn btn-outline">Contact Me</a>
@@ -80,20 +80,27 @@
             </div>
         </section>
 
+
+<!-- Projects -->
+
+
+
         <section class="section" id="projects">
-            <h2 class="section-title">Projects</h2>
+            <h2 class="section-title">Projects</h2> 
+            <a class="all-projects" href="projects.html">All Projects</a>
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-img">
                         <img src="images - Copy/wires.jpg" alt="Arduino Automation" loading="lazy">
                     </div>
                     <div class="project-content">
-                        <h3>Smart Home Automation</h3>
-                        <p>Built an Arduino-based system to control lights and appliances via mobile app (React Native).</p>
+                        <h3>Autonomous drone</h3>
+                        <p>Designed and built a drone for <br> workplace surveillance and photography purposes</p>
                         <div class="project-tags">
-                            <span class="project-tag">Arduino</span>
-                            <span class="project-tag">React Native</span>
-                            <span class="project-tag">IoT</span>
+                            <span class="project-tag">Ardupilot</span>
+                            <span class="project-tag">fusion 360</span>
+                            <span class="project-tag">3d printing</span>
+                            <span class="project-tag">Electronics</span>
                         </div>
                         <a href="#" class="btn btn-outline">View Details</a>
                     </div>
@@ -103,12 +110,14 @@
                         <img src="images - Copy/arm.jpg" alt="3D Printed Robotic Arm" loading="lazy">
                     </div>
                     <div class="project-content">
-                        <h3>3D Printed Robotic Arm</h3>
-                        <p>Designed in Fusion 360 and programmed with C++ for object sorting.</p>
+                        <h3 style="font-size: 18px;">Miniature industrial robotic arm </h3>
+                        <p>Designed and built an industrial robotic arm for sorting, pick-and-place, and assembly tasks</p>
                         <div class="project-tags">
-                            <span class="project-tag">Fusion 360</span>
+                            <span class="project-tag">fusion 360</span>
+                            <span class="project-tag">solidworks</span>
+                            <span class="project-tag">3d printing</span>
+                            <span class="project-tag">Electronics</span>
                             <span class="project-tag">C++</span>
-                            <span class="project-tag">3D Printing</span>
                         </div>
                         <a href="#" class="btn btn-outline">View Details</a>
                     </div>
@@ -118,13 +127,15 @@
                         <img src="images - Copy/escv.jpg" alt="3D Printed Excavator" loading="lazy">
                     </div>
                     <div class="project-content">
-                        <h3>3D Printed escavator</h3>
-                        <p>Designed in Fusion 360 and programmed with C++ for object sorting.</p>
+                        <h3>Excavator model</h3>
+                        <p>Modeled a functional excavator using solidworks and rhinoceros 3d</p>
                         <div class="project-tags">
                             <span class="project-tag">Fusion 360</span>
-                            <span class="project-tag">C++</span>
+                            <span class="project-tag">C++</span> 
                             <span class="project-tag">3D Printing</span>
                         </div>
+                        <br> 
+                        <br>
                         <a href="#" class="btn btn-outline">View Details</a>
                     </div>
                 </div>
@@ -158,52 +169,25 @@
             <div class="social-links">
                 <a href="mailto:jaysonablorde@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
                 <a href="tel:+233247775232" class="social-link"><i class="fas fa-phone"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/jason-ablorde-54a27b349?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app " class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://x.com/JasonAblor28340?t=izZQoosk6k8IsNDSD1Bwgw&s=08 " class="social-link"><i class="fa-brands fa-square-x-twitter"></i></a>
             </div>
             <p class="copyright">&copy;2025 Jason Ablorde. All rights reserved.</p>
         </footer>
     </div>
 
-    <!-- JavaScript (Keep Original Scripts) -->
-    <script>
-            <!-- JavaScript -->
 
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        themeToggle.addEventListener('click', () => {
-            document.documentElement.setAttribute('data-theme', 
-                document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light'
-            );
-            
-            if (document.documentElement.getAttribute('data-theme') === 'dark') {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            } else {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            }
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
+
+
+
+
+
+
+
+
+
+
+
+    <script src="script.js"></script>
 </body>
 </html>
